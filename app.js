@@ -75,6 +75,8 @@ app.use(session(sessionConfig));
 app.use(flash());
 // app.use(helmet({ crossOriginEmbedderPolicy: false }));
 
+const cloudinaryName = process.env.CLOUDINARY_CLOUD_NAME;
+
 const scriptSrcUrls = [
     "https://stackpath.bootstrapcdn.com/",
     "https://api.tiles.mapbox.com/",
@@ -82,7 +84,7 @@ const scriptSrcUrls = [
     "https://kit.fontawesome.com/",
     "https://cdnjs.cloudflare.com/",
     "https://cdn.jsdelivr.net/",
-    "https://res.cloudinary.com/dl5af9wkw/"
+    `https://res.cloudinary.com/${cloudinaryName}/`
 ];
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
@@ -92,15 +94,15 @@ const styleSrcUrls = [
     "https://fonts.googleapis.com/",
     "https://use.fontawesome.com/",
     "https://cdn.jsdelivr.net/",
-    "https://res.cloudinary.com/dl5af9wkw/"
+    `https://res.cloudinary.com/${cloudinaryName}/`
 ];
 const connectSrcUrls = [
     "https://*.tiles.mapbox.com",
     "https://api.mapbox.com",
     "https://events.mapbox.com",
-    "https://res.cloudinary.com/dv5vm4sqh/"
+    `https://res.cloudinary.com/${cloudinaryName}/`
 ];
-const fontSrcUrls = [ "https://res.cloudinary.com/dl5af9wkw/" ];
+const fontSrcUrls = [ `https://res.cloudinary.com/${cloudinaryName}/` ];
  
 app.use(
     helmet.contentSecurityPolicy({
@@ -115,12 +117,12 @@ app.use(
                 "'self'",
                 "blob:",
                 "data:",
-                "https://res.cloudinary.com/dl5af9wkw/",
+                `https://res.cloudinary.com/${cloudinaryName}/`,
                 "https://images.unsplash.com/",
                 "https://source.unsplash.com/"
             ],
             fontSrc    : [ "'self'", ...fontSrcUrls ],
-            mediaSrc   : [ "https://res.cloudinary.com/dl5af9wkw/" ],
+            mediaSrc   : [ `https://res.cloudinary.com/${cloudinaryName}/` ],
             childSrc   : [ "blob:" ]
         }
     })
