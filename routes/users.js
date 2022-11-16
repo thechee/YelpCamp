@@ -5,6 +5,7 @@ const users = require('../controllers/users');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user');
 const { route } = require('./campgrounds');
+const { checkReturnTo } = require('../middleware');
 
 router.route('/register')
     .get(users.renderRegister)
@@ -12,7 +13,7 @@ router.route('/register')
 
 router.route('/login')
     .get(users.renderLogin)
-    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login', failureMessage: true, keepSessionInfo: true }), users.login)
+    .post(checkReturnTo, passport.authenticate('local', { failureFlash: true, failureRedirect: '/login', failureMessage: true, keepSessionInfo: true }), users.login)
 
 router.get('/logout', users.logout);
 
